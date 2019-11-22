@@ -9,6 +9,7 @@ app.use(express.json());
 
 //Routes
 app.use(require('./routes/authentication'));
+app.use(require('./routes/book'));
 
 //Starting the servers
 app.listen(app.get('port'), () => {
