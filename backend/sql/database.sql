@@ -1,5 +1,7 @@
 CREATE DATABASE eLibrary
 
+USE eLibrary
+
 CREATE TABLE `elibrary`.`authentication` (
   `idAuthentication` INT NOT NULL AUTO_INCREMENT,
   `user` VARCHAR(45) NOT NULL,
