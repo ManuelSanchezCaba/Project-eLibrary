@@ -1,29 +1,93 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import React, { Component } from 'react';
+import { Link, Redirect } from 'react-router-dom';
 
 export default class Navegador extends Component {
-    render() {
-        return (
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-                <Link className="navbar-brand" to="/">eLibrary</Link>
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                <div className="collapse navbar-collapse" id="navbarNav">
-                    <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
-                        <li className="nav-item active">
-                            <Link className="nav-link" to="/books">eReader</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/admin">eAdmin</Link>
-                        </li>
-                    </ul>
-                    <div className="form-inline my-2 my-lg-0 d-flex flex-column">
-                        <div className="text-white">Usuario: </div>
-                        <div className="text-white">Rol: </div>
-                    </div>
-                </div>
-            </nav>
-        )
-    }
+	state = {
+		eRead: '',
+		eAd: '',
+		redirect: false,
+	};
+
+	componentDidMount() {
+		if (sessionStorage.getItem('userData')) {
+			console.log('User logged in');
+		} else {
+			this.setState({ redirect: true });
+		}
+	}
+
+	onClickReader = (e) => {
+		this.setState({ eRead: 'nav-item active', eAd: '' });
+	};
+
+	onClickAdmin = (e) => {
+		this.setState({ eAd: 'nav-item active', eRead: '' });
+	};
+
+	logout = (e) => {
+		e.preventDefault();
+		sessionStorage.setItem('userData', '');
+		sessionStorage.clear();
+		this.setState({ redirect: true });
+	};
+
+	render() {
+		if (this.state.redirect) {
+			return <Redirect to={'/login'} />;
+		}
+
+		return (
+			<nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+				<Link className="navbar-brand" to="/books">
+					eLibrary
+				</Link>
+				<button
+					className="navbar-toggler"
+					type="button"
+					data-toggle="collapse"
+					data-target="#navbarNav"
+					aria-controls="navbarNav"
+					aria-expanded="false"
+					aria-label="Toggle navigation"
+				>
+					<span className="navbar-toggler-icon"></span>
+				</button>
+				<div className="collapse navbar-collapse" id="navbarNav">
+					<ul className="navbar-nav mr-auto mt-2 mt-lg-0">
+						<li className={this.state.eRead} onClick={this.onClickReader}>
+							<Link className="nav-link" to="/books">
+								eReader
+							</Link>
+						</li>
+						<li className={this.state.eAd} onClick={this.onClickAdmin}>
+							<Link className="nav-link" to="/admin">
+								eAdmin
+							</Link>
+						</li>
+					</ul>
+					<form className="form-inline my-2 my-lg-0">
+						<input
+							className="form-control mr-sm-2"
+							type="search"
+							placeholder="Search"
+							aria-label="Search"
+						/>
+						<button
+							className="btn btn-outline-info my-2 my-sm-0 m-2"
+							type="submit"
+						>
+							Search
+						</button>
+						<button
+							className="btn btn-outline-success my-2 my-sm-0"
+							type="submit"
+							onClick={this.logout}
+						>
+							Logout
+						</button>
+					</form>
+				</div>
+			</nav>
+		);
+	}
 }
