@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
-import '../css/Login.css';
+import '../style/Login.css';
 
 export default class Login extends Component {
 	constructor(props) {
@@ -11,6 +11,7 @@ export default class Login extends Component {
 			password: '',
 			user: [],
 			redirec: false,
+			redirectS: false,
 		};
 	}
 
@@ -27,12 +28,20 @@ export default class Login extends Component {
 				user.user === this.state.username &&
 				user.password === this.state.password
 			) {
+				if (user.tipo_usuario === 'eReader') {
+					sessionStorage.setItem('t_usuario', 'eReader');
+				} else {
+					sessionStorage.setItem('t_usuario', 'eAdmin');
+				}
 				sessionStorage.setItem('userData', user);
 				this.setState({ redirec: true });
-			} else {
-				console.log('login error!');
 			}
 		});
+	};
+
+	signup = (e) => {
+		e.preventDefault();
+		this.setState({ redirectS: true });
 	};
 
 	render() {
@@ -40,56 +49,62 @@ export default class Login extends Component {
 			return <Redirect to={'/'} />;
 		}
 
+		if (this.state.redirectS) {
+			return <Redirect to={'/signup'} />;
+		}
+
 		if (sessionStorage.getItem('userData')) {
 			return <Redirect to={'/'} />;
 		}
 
 		return (
-			<form className="form-signin ">
-				<h1>Login</h1>
-				<div className="form-group">
-					<label for="username">Username</label>
-					<input
-						type="text"
-						id="username"
-						placeholder="username"
-						name="username"
-						className="form-control"
-						onChange={this.onChange}
-					/>
-				</div>
-				<div className="form-group">
-					<label for="password">Password</label>
-					<input
-						type="password"
-						id="password"
-						placeholder="password"
-						name="password"
-						className="form-control"
-						onChange={this.onChange}
-					/>
-				</div>
-				<div className="row">
-					<div className="col-xs-6 col-sm-6 col-md-6">
+			<div className="container h-100 d-flex justify-content-center align-items-center">
+				<form className="form-signin">
+					<h1>Login</h1>
+					<div className="form-group">
+						<label for="username">Username</label>
 						<input
-							type="submit"
-							name="login"
-							value="login"
-							className="btn btn-primary btn-block"
-							onClick={this.login}
+							type="text"
+							id="username"
+							placeholder="username"
+							name="username"
+							className="form-control"
+							onChange={this.onChange}
 						/>
 					</div>
-					<div className="col-xs-6 col-sm-6 col-md-6">
+					<div className="form-group">
+						<label for="password">Password</label>
 						<input
-							type="submit"
-							name="signup"
-							value="signup"
-							className="btn btn-secondary btn-block"
-							onClick={this.login}
+							type="password"
+							id="password"
+							placeholder="password"
+							name="password"
+							className="form-control"
+							onChange={this.onChange}
 						/>
 					</div>
-				</div>
-			</form>
+					<div className="row">
+						<div className="col-xs-6 col-sm-6 col-md-6">
+							<input
+								type="submit"
+								name="login"
+								value="login"
+								className="btn btn-primary btn-block"
+								onClick={this.login}
+							/>
+						</div>
+						<div className="col-xs-6 col-sm-6 col-md-6">
+							<input
+								type="submit"
+								name="signup"
+								value="signup"
+								className="btn btn-secondary btn-block"
+								onClick={this.signup}
+							/>
+						</div>
+					</div>
+				</form>
+			</div>
 		);
 	}
 }

@@ -16,14 +16,6 @@ export default class Navegador extends Component {
 		}
 	}
 
-	onClickReader = (e) => {
-		this.setState({ eRead: 'nav-item active', eAd: '' });
-	};
-
-	onClickAdmin = (e) => {
-		this.setState({ eAd: 'nav-item active', eRead: '' });
-	};
-
 	logout = (e) => {
 		e.preventDefault();
 		sessionStorage.setItem('userData', '');
@@ -38,7 +30,7 @@ export default class Navegador extends Component {
 
 		return (
 			<nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-				<Link className="navbar-brand" to="/books">
+				<Link className="navbar-brand" to="/">
 					eLibrary
 				</Link>
 				<button
@@ -54,12 +46,12 @@ export default class Navegador extends Component {
 				</button>
 				<div className="collapse navbar-collapse" id="navbarNav">
 					<ul className="navbar-nav mr-auto mt-2 mt-lg-0">
-						<li className={this.state.eRead} onClick={this.onClickReader}>
-							<Link className="nav-link" to="/books">
+						<li className={sessionStorage.getItem('eRead')}>
+							<Link className="nav-link" to="/">
 								eReader
 							</Link>
 						</li>
-						<li className={this.state.eAd} onClick={this.onClickAdmin}>
+						<li className={sessionStorage.getItem('eAd')}>
 							<Link className="nav-link" to="/admin">
 								eAdmin
 							</Link>
