@@ -7,6 +7,7 @@ import Navegador from './components/Navegador';
 import AdminTable from './components/AdminTable';
 import showBooks from './components/showBooks';
 import Login from './components/Login';
+import Register from './components/Register';
 
 function App() {
 	return (
@@ -16,6 +17,7 @@ function App() {
 				<Route exact path="/login" component={Login} />
 				<Route exact path="/admin" component={AdminTable} />
 				<Route exact path="/books" component={showBooks} />
+				<Route exact path="/signup" component={Register} />
 			</div>
 		</Router>
 	);

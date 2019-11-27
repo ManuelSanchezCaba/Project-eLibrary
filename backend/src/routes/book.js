@@ -28,8 +28,8 @@ router.get('/api/book/:id', (req, res) => {
 
 //Esta funcion crea un libro
 router.post('/api/book', (req, res) => {
-    const { direccion, autor, fecha_creacion, categoria, descripcion, cantidad_pagina } = req.body;
-    mysqlConnection.query("insert into book(direccion, autor, fecha_creacion, categoria, descripcion, cantidad_pagina) values ('" + direccion + "', '" + autor + "', '" + fecha_creacion + "', '" + categoria + "', '" + descripcion + "', '" + cantidad_pagina +  "')", (err, rows, fields) => {
+    const { contenido, autor, fecha_creacion, categoria, descripcion, cantidad_pagina } = req.body;
+    mysqlConnection.query("insert into book(contenido, autor, fecha_creacion, categoria, descripcion, cantidad_pagina) values ('" + contenido + "', '" + autor + "', '" + fecha_creacion + "', '" + categoria + "', '" + descripcion + "', '" + cantidad_pagina +  "')", (err, rows, fields) => {
           if(!err) {
                 res.json({status: 'Book Saved'});
             } else {

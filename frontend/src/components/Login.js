@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
-import '../css/Login.css';
+import '../style/Login.css';
 
 export default class Login extends Component {
 	constructor(props) {
@@ -11,6 +11,7 @@ export default class Login extends Component {
 			password: '',
 			user: [],
 			redirec: false,
+			redirectS: false,
 		};
 	}
 
@@ -35,9 +36,18 @@ export default class Login extends Component {
 		});
 	};
 
+	signup = (e) => {
+		e.preventDefault();
+		this.setState({ redirectS: true });
+	}
+
 	render() {
 		if (this.state.redirec) {
 			return <Redirect to={'/'} />;
+		}
+
+		if (this.state.redirectS) {
+			return <Redirect to={'/signup'} />;
 		}
 
 		if (sessionStorage.getItem('userData')) {
@@ -85,7 +95,7 @@ export default class Login extends Component {
 							name="signup"
 							value="signup"
 							className="btn btn-secondary btn-block"
-							onClick={this.login}
+							onClick={this.signup}
 						/>
 					</div>
 				</div>
