@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
+import { Button } from 'reactstrap';
 
 import Navegador from './Navegador';
 import NewBook from './NewBook';
@@ -20,6 +21,7 @@ export default class AdminTable extends Component {
 				cantidad_pagina: '',
 				Accion: '',
 			},
+			redirect: false,
 		};
 
 		sessionStorage.setItem('eRead', '');
@@ -49,10 +51,20 @@ export default class AdminTable extends Component {
 		cantidad_pagina
 	) {}
 
+	signup = (e) => {
+		e.preventDefault();
+		sessionStorage.setItem('cancel_redirec', '/admin');
+		this.setState({ redirect: true });
+	};
+
 	render() {
 		if (sessionStorage.getItem('t_usuario') !== 'eAdmin') {
 			sessionStorage.setItem('eAd', 'd-none');
 			return <Redirect to={'/'} />;
+		}
+
+		if (this.state.redirect) {
+			return <Redirect to={'/signup'} />;
 		}
 
 		this.getBook();
@@ -62,7 +74,16 @@ export default class AdminTable extends Component {
 				<Navegador />
 
 				<div className="container p-4">
-					<NewBook />
+					<div className="d-flex flex-row bd-highlight mb-3">
+						<NewBook />
+						<Button
+							className="my-2 ml-2"
+							color="secondary"
+							onClick={this.signup}
+						>
+							Add User
+						</Button>
+					</div>
 					<table className="table table-bordered">
 						<thead>
 							<tr>

@@ -6,6 +6,8 @@ export default class Navegador extends Component {
 		eRead: '',
 		eAd: '',
 		redirect: false,
+		ae: 'false',
+		dnv: 'collapse navbar-collapse',
 	};
 
 	componentDidMount() {
@@ -21,6 +23,21 @@ export default class Navegador extends Component {
 		sessionStorage.setItem('userData', '');
 		sessionStorage.clear();
 		this.setState({ redirect: true });
+	};
+
+	navbarT = (e) => {
+		e.preventDefault();
+		if (this.state.ae === 'false') {
+			this.setState({
+				ae: 'true',
+				dnv: 'collapse navbar-collapse show',
+			});
+		} else {
+			this.setState({
+				ae: 'false',
+				dnv: 'collapse navbar-collapse',
+			});
+		}
 	};
 
 	render() {
@@ -39,12 +56,13 @@ export default class Navegador extends Component {
 					data-toggle="collapse"
 					data-target="#navbarNav"
 					aria-controls="navbarNav"
-					aria-expanded="false"
+					aria-expanded={this.state.ae}
 					aria-label="Toggle navigation"
+					onClick={this.navbarT}
 				>
 					<span className="navbar-toggler-icon"></span>
 				</button>
-				<div className="collapse navbar-collapse" id="navbarNav">
+				<div className={this.state.dnv} id="navbarNav">
 					<ul className="navbar-nav mr-auto mt-2 mt-lg-0">
 						<li className={sessionStorage.getItem('eRead')}>
 							<Link className="nav-link" to="/">
@@ -66,12 +84,14 @@ export default class Navegador extends Component {
 						/>
 						<button
 							className="btn btn-outline-info my-2 my-sm-0 m-2"
+							color="info"
 							type="submit"
 						>
 							Search
 						</button>
 						<button
 							className="btn btn-outline-success my-2 my-sm-0"
+							color="success"
 							type="submit"
 							onClick={this.logout}
 						>

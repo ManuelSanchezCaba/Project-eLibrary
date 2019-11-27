@@ -13,6 +13,7 @@ export default class Login extends Component {
 			redirec: false,
 			redirectS: false,
 		};
+		sessionStorage.setItem('t_usuario', '');
 	}
 
 	onChange = (e) => {
@@ -35,12 +36,14 @@ export default class Login extends Component {
 				}
 				sessionStorage.setItem('userData', user);
 				this.setState({ redirec: true });
+				return user;
 			}
 		});
 	};
 
 	signup = (e) => {
 		e.preventDefault();
+		sessionStorage.setItem('cancel_redirec', '/login');
 		this.setState({ redirectS: true });
 	};
 
@@ -62,7 +65,7 @@ export default class Login extends Component {
 				<form className="form-signin">
 					<h1>Login</h1>
 					<div className="form-group">
-						<label for="username">Username</label>
+						<label htmlFor="username">Username</label>
 						<input
 							type="text"
 							id="username"
@@ -73,7 +76,7 @@ export default class Login extends Component {
 						/>
 					</div>
 					<div className="form-group">
-						<label for="password">Password</label>
+						<label htmlFor="password">Password</label>
 						<input
 							type="password"
 							id="password"
