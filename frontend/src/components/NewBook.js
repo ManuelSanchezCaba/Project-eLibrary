@@ -17,6 +17,7 @@ export default class NewBook extends Component {
 		this.state = {
 			newBookModal: false,
 			newBookData: {
+				titulo: '',
 				contenido: '',
 				autor: '',
 				categoria: '',
@@ -45,6 +46,7 @@ export default class NewBook extends Component {
 					book: [],
 					newBookModal: false,
 					newBookData: {
+						titulo: '',
 						contenido: '',
 						autor: '',
 						fecha_creacion: '',
@@ -75,6 +77,20 @@ export default class NewBook extends Component {
 						Add a new Book
 					</ModalHeader>
 					<ModalBody>
+
+					<FormGroup>
+							<Label for="titulo">Titulo</Label>
+							<Input
+								id="titulo"
+								value={this.state.newBookData.titulo}
+								onChange={(e) => {
+									let { newBookData } = this.state;
+									newBookData.titulo = e.target.value;
+									this.setState({ newBookData });
+								}}
+							/>
+						</FormGroup>
+
 						<FormGroup>
 							<Label for="contenido">Contenido</Label>
 							<Input

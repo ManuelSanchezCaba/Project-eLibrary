@@ -13,6 +13,7 @@ export default class AdminTable extends Component {
 			book: [],
 			editBookData: {
 				idBook: '',
+				titulo: '',
 				contenido: '',
 				autor: '',
 				fecha_creacion: '',
@@ -88,6 +89,7 @@ export default class AdminTable extends Component {
 						<thead>
 							<tr>
 								<th scope="col">id</th>
+								<th scope="col">titulo</th>
 								<th scope="col">contenido</th>
 								<th scope="col">autor</th>
 								<th scope="col">fecha de creacion</th>
@@ -101,6 +103,7 @@ export default class AdminTable extends Component {
 							{this.state.book.map((book) => (
 								<tr key={book.idBook}>
 									<th scope="row">{book.idBook}</th>
+									<td>{book.titulo}</td>
 									<td>{book.contenido}</td>
 									<td>{book.autor}</td>
 									<td>{book.fecha_creacion.slice(0, 10).replace('T', ' ')}</td>
@@ -117,6 +120,7 @@ export default class AdminTable extends Component {
 											onClick={this.editBook.bind(
 												this,
 												book.idBook,
+												book.titulo,
 												book.contenido,
 												book.autor,
 												book.fecha_creacion,

@@ -13,6 +13,7 @@ CREATE TABLE `elibrary`.`authentication` (
 
 CREATE TABLE `elibrary`.`book` (
   `idBook` INT NOT NULL AUTO_INCREMENT,
+  'titulo' VARCHAR(100) NOT NULL,
   `contenido` LONGTEXT NOT NULL,
   `autor` VARCHAR(100) NOT NULL,
   `fecha_creacion` DATETIME NULL,
