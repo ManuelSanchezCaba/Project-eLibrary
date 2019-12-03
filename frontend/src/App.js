@@ -6,6 +6,7 @@ import AdminTable from './components/AdminTable';
 import showBooks from './components/showBooks';
 import Login from './components/Login';
 import Register from './components/Register';
+import Perfil_Libro from './components/Perfil_Libro';
 
 function App() {
 	return (
@@ -14,6 +15,7 @@ function App() {
 			<Route exact path="/admin" component={AdminTable} />
 			<Route exact path="/" component={showBooks} />
 			<Route exact path="/signup" component={Register} />
+			<Route exact path="/perfil_libro" component={Perfil_Libro} />		
 		</Router>
 	);
 }
