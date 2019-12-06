@@ -32,11 +32,12 @@ export default class Perfil_Libro extends Component {
 	};
 
 	readBook = (e) => {
+		e.preventDefault();
 		this.setState({ redirectB: true });
-	}
+	};
 
 	render() {
-		if(this.state.redirectB) {
+		if (this.state.redirectB) {
 			return <Redirect to={'/libro'} />;
 		}
 
@@ -55,10 +56,13 @@ export default class Perfil_Libro extends Component {
 						<CardText className="font-weight-normal">
 							{this.state.book.descripcion}
 						</CardText>
-						<Button className="mr-2" color="outline-primary" onClick={this.readBook}>
+						<Button
+							className="mr-2"
+							color="outline-primary"
+							onClick={this.readBook}
+						>
 							Leer el libro
 						</Button>
-						<Button color="outline-success">Escuchar el libro</Button>
 					</CardBody>
 				</Card>
 			</div>

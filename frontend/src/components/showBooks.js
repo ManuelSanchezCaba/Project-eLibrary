@@ -52,7 +52,7 @@ export default class showBooks extends Component {
 									key={book.idBook}
 								>
 									<Card body className="rounded">
-										<i className="fas fa-book size" />
+										<i className="fas fa-book sizeS" />
 										<CardTitle className="center font-weight-bold">
 											{book.titulo}
 										</CardTitle>
