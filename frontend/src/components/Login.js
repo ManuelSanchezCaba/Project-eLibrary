@@ -23,7 +23,7 @@ export default class Login extends Component {
 	login = async (e) => {
 		e.preventDefault();
 		let check = false;
-		const res = await axios.get('http://localhost:4000/api/authentication');
+		const res = await axios.get('/api/authentication');
 		this.setState({ user: res.data });
 		this.state.user.map((user) => {
 			if (

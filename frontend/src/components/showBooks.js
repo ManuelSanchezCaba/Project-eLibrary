@@ -25,7 +25,7 @@ export default class showBooks extends Component {
 	}
 
 	getBook = async () => {
-		const res = await axios.get('http://localhost:4000/api/book');
+		const res = await axios.get('/api/book');
 		this.setState({ book: res.data });
 	};
 

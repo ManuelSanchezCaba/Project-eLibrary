@@ -33,30 +33,28 @@ export default class NewBook extends Component {
 	};
 
 	getBook = async () => {
-		const res = await axios.get('http://localhost:4000/api/book');
+		const res = await axios.get('/api/book');
 		this.setState({ book: res.data });
 	};
 
 	addBook = async () => {
-		axios
-			.post('http://localhost:4000/api/book', this.state.newBookData)
-			.then((response) => {
-				console.log(response.data);
-				this.setState({
-					book: [],
-					newBookModal: false,
-					newBookData: {
-						titulo: '',
-						contenido: '',
-						autor: '',
-						fecha_creacion: '',
-						categoria: '',
-						descripcion: '',
-						cantidad_pagina: '',
-						Accion: '',
-					},
-				});
+		axios.post('/api/book', this.state.newBookData).then((response) => {
+			console.log(response.data);
+			this.setState({
+				book: [],
+				newBookModal: false,
+				newBookData: {
+					titulo: '',
+					contenido: '',
+					autor: '',
+					fecha_creacion: '',
+					categoria: '',
+					descripcion: '',
+					cantidad_pagina: '',
+					Accion: '',
+				},
 			});
+		});
 	};
 
 	fileBook = () => {

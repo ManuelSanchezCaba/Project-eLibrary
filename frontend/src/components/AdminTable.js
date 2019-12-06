@@ -43,12 +43,12 @@ export default class AdminTable extends Component {
 	}
 
 	getBook = async () => {
-		const res = await axios.get('http://localhost:4000/api/book');
+		const res = await axios.get('/api/book');
 		this.setState({ book: res.data });
 	};
 
 	deleteBook = async (id) => {
-		await axios.delete('http://localhost:4000/api/book/' + id);
+		await axios.delete('/api/book/' + id);
 	};
 
 	editBook(
@@ -89,7 +89,7 @@ export default class AdminTable extends Component {
 		} = this.state.editBookData;
 		fecha_creacion = fecha_creacion.slice(0, 10).replace('T', ' ');
 		await axios
-			.put('http://localhost:4000/api/book/' + this.state.editBookData.idBook, {
+			.put('/api/book/' + this.state.editBookData.idBook, {
 				idBook,
 				titulo,
 				contenido,

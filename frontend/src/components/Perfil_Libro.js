@@ -26,7 +26,7 @@ export default class Perfil_Libro extends Component {
 
 	getBook = async () => {
 		const res = await axios.get(
-			'http://localhost:4000/api/book/' + sessionStorage.getItem('idBook')
+			'/api/book/' + sessionStorage.getItem('idBook')
 		);
 		this.setState({ book: res.data });
 	};

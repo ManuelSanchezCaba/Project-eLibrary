@@ -24,7 +24,7 @@ export default class Libro extends Component {
 
 	getBook = async () => {
 		const res = await axios.get(
-			'http://localhost:4000/api/book/' + sessionStorage.getItem('idBook')
+			'/api/book/' + sessionStorage.getItem('idBook')
 		);
 		this.setState({ libro: res.data });
 	};

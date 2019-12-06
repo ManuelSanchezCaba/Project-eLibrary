@@ -31,7 +31,7 @@ export default class Register extends Component {
 		e.preventDefault();
 		console.log(this.state.new_user.tipo_usuario);
 		await axios
-			.post('http://localhost:4000/api/authentication', this.state.new_user)
+			.post('/api/authentication', this.state.new_user)
 			.then((response) => {
 				console.log(response.data);
 				this.setState({
