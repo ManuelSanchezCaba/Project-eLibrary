@@ -29,11 +29,11 @@ export default class showBooks extends Component {
 		this.setState({ book: res.data });
 	};
 
-	cajaClick = (e) => {
-		e.preventDefault();
+	cajaClick(id) {
+		// e.preventDefault();
 		this.setState({ redirectP: true });
-		console.log('Click');
-	};
+		sessionStorage.setItem('idBook', id);
+	}
 
 	render() {
 		if (this.state.redirectP) {
@@ -47,7 +47,10 @@ export default class showBooks extends Component {
 					<div className="container p-4 rounded">
 						<Row className="mb-4">
 							{this.state.book.map((book) => (
-								<Col onClick={this.cajaClick} key={book.idBook}>
+								<Col
+									onClick={this.cajaClick.bind(this, book.idBook)}
+									key={book.idBook}
+								>
 									<Card body className="rounded">
 										<i className="fas fa-book size" />
 										<CardTitle className="center font-weight-bold">

@@ -7,3 +7,9 @@
 .center {
 	margin: auto;
 }
+
+.sizeP {
+	font-size: 20px;
+	color: brown;
+	margin-right: 5px;
+}
