@@ -22,6 +22,7 @@ export default class Login extends Component {
 
 	login = async (e) => {
 		e.preventDefault();
+		let check = false;
 		const res = await axios.get('http://localhost:4000/api/authentication');
 		this.setState({ user: res.data });
 		this.state.user.map((user) => {
@@ -29,6 +30,7 @@ export default class Login extends Component {
 				user.user === this.state.username &&
 				user.password === this.state.password
 			) {
+				check = true;
 				if (user.tipo_usuario === 'eReader') {
 					sessionStorage.setItem('t_usuario', 'eReader');
 				} else {
@@ -39,6 +41,12 @@ export default class Login extends Component {
 				return user;
 			}
 		});
+
+		if (!check) {
+			alert(
+				'Usuario o contraseña incorrecto. Por favor ingresar sus credenciales.'
+			);
+		}
 	};
 
 	signup = (e) => {

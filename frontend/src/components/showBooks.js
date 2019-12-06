@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Navegador from './Navegador';
-import { Card, CardTitle, CardText, Row, Col, CardImg, } from 'reactstrap';
+import { Card, CardTitle, CardText, Row, Col } from 'reactstrap';
+import '../style/Iconos.css';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 
@@ -31,44 +32,38 @@ export default class showBooks extends Component {
 	cajaClick = (e) => {
 		e.preventDefault();
 		this.setState({ redirectP: true });
-		console.log('Click')
+		console.log('Click');
 	};
 
 	render() {
-		if(this.state.redirectP) {
+		if (this.state.redirectP) {
 			return <Redirect to={'/perfil_libro'} />;
 		}
 
 		return (
 			<div>
 				<div>
-				<Navegador />
-				<div className="container p-5">
-					<div className="container h-100 d-flex justify-content-center align-items-center">
+					<Navegador />
+					<div className="container p-4 rounded">
 						<Row className="mb-4">
 							{this.state.book.map((book) => (
-								<Col sm="4" onClick={this.cajaClick} key={book.idBook}>
-									<Card body>
-										<CardImg top width="100%" src="/assets/318x180.svg" alt="Card image cap" type="submit" />
-										<CardTitle>{book.titulo} </CardTitle>
-										<CardText>{book.descripcion}
+								<Col onClick={this.cajaClick} key={book.idBook}>
+									<Card body className="rounded">
+										<i className="fas fa-book size" />
+										<CardTitle className="center font-weight-bold">
+											{book.titulo}
+										</CardTitle>
+										<CardText className="center">{book.descripcion}</CardText>
+										<CardText className="center font-italic">
+											{book.autor}
 										</CardText>
 									</Card>
-								<input
-								type="submit"
-								name="ver"
-								value="ver"
-								className="btn btn-secondary btn-block"
-								onClick={this.Perfil_Libro}
-								/>
 								</Col>
 							))}
 						</Row>
-						</div>
 					</div>
 				</div>
 			</div>
-
 		);
 	}
 }

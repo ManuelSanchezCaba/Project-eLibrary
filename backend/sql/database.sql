@@ -1,6 +1,6 @@
-CREATE DATABASE eLibrary
+CREATE DATABASE eLibrary;
 
-USE eLibrary
+USE eLibrary;
 
 CREATE TABLE `elibrary`.`authentication` (
   `idAuthentication` INT NOT NULL AUTO_INCREMENT,
@@ -13,7 +13,7 @@ CREATE TABLE `elibrary`.`authentication` (
 
 CREATE TABLE `elibrary`.`book` (
   `idBook` INT NOT NULL AUTO_INCREMENT,
-  'titulo' VARCHAR(100) NOT NULL,
+  `titulo` VARCHAR(100) NOT NULL,
   `contenido` LONGTEXT NOT NULL,
   `autor` VARCHAR(100) NOT NULL,
   `fecha_creacion` DATETIME NULL,

@@ -59,6 +59,25 @@ export default class NewBook extends Component {
 			});
 	};
 
+	fileBook = () => {
+		if (window.File && window.FileReader && window.FileList && window.Blob) {
+			var file = document.querySelector('input[type=file]').files[0];
+			var reader = new FileReader();
+			var textFile = /text.*/;
+			let { newBookData } = this.state;
+
+			if (file.type.match(textFile)) {
+				reader.onload = function(event) {
+					newBookData.contenido = event.target.result;
+				};
+				this.setState({ newBookData });
+			}
+			reader.readAsText(file);
+		} else {
+			alert('Este navegador no acepta la api FileReader');
+		}
+	};
+
 	render() {
 		return (
 			<div>
@@ -77,8 +96,7 @@ export default class NewBook extends Component {
 						Add a new Book
 					</ModalHeader>
 					<ModalBody>
-
-					<FormGroup>
+						<FormGroup>
 							<Label for="titulo">Titulo</Label>
 							<Input
 								id="titulo"
@@ -102,6 +120,7 @@ export default class NewBook extends Component {
 									this.setState({ newBookData });
 								}}
 							/>
+							<Input type="file" name="file" onChange={this.fileBook} />
 						</FormGroup>
 						<FormGroup>
 							<Label for="autor">Autor</Label>
