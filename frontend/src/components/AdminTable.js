@@ -1,3 +1,4 @@
+//imports
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
@@ -11,7 +12,6 @@ import {
 	ModalFooter,
 	Button,
 } from 'reactstrap';
-
 import Navegador from './Navegador';
 import NewBook from './NewBook';
 
@@ -43,14 +43,14 @@ export default class AdminTable extends Component {
 	}
 
 	getBook = async () => {
-		const res = await axios.get('/api/book');
+		const res = await axios.get('https://elibrary07.herokuapp.com/api/book');
 		this.setState({ book: res.data });
 	};
-
+// to delete book
 	deleteBook = async (id) => {
-		await axios.delete('/api/book/' + id);
+		await axios.delete('https://elibrary07.herokuapp.com/api/book/' + id);
 	};
-
+//to edit book
 	editBook(
 		idBook,
 		titulo,
@@ -75,7 +75,7 @@ export default class AdminTable extends Component {
 			editBookModal: !this.state.editBookModal,
 		});
 	}
-
+//to update book
 	updateBook = async (e) => {
 		let {
 			idBook,
@@ -125,7 +125,7 @@ export default class AdminTable extends Component {
 	toggleEditBookModal = () => {
 		this.setState({ editBookModal: !this.state.editBookModal });
 	};
-
+//render
 	render() {
 		if (sessionStorage.getItem('t_usuario') !== 'eAdmin') {
 			sessionStorage.setItem('eAd', 'd-none');

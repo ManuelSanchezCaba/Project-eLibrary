@@ -26,16 +26,16 @@ export default class Perfil_Libro extends Component {
 
 	getBook = async () => {
 		const res = await axios.get(
-			'/api/book/' + sessionStorage.getItem('idBook')
+			'https://elibrary07.herokuapp.com/api/book/' + sessionStorage.getItem('idBook')
 		);
 		this.setState({ book: res.data });
 	};
-
+// to read book
 	readBook = (e) => {
 		e.preventDefault();
 		this.setState({ redirectB: true });
 	};
-
+//render
 	render() {
 		if (this.state.redirectB) {
 			return <Redirect to={'/libro'} />;

@@ -1,3 +1,4 @@
+//imports
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
@@ -15,15 +16,16 @@ export default class Login extends Component {
 		};
 		sessionStorage.setItem('t_usuario', '');
 	}
-
+	//event of targets
 	onChange = (e) => {
 		this.setState({ [e.target.name]: e.target.value });
 	};
 
+	//this prove if the user is admin or comun user 
 	login = async (e) => {
 		e.preventDefault();
 		let check = false;
-		const res = await axios.get('/api/authentication');
+		const res = await axios.get('https://elibrary07.herokuapp.com/api/authentication');
 		this.setState({ user: res.data });
 		this.state.user.map((user) => {
 			if (
@@ -48,13 +50,13 @@ export default class Login extends Component {
 			);
 		}
 	};
-
+	//redirect to login
 	signup = (e) => {
 		e.preventDefault();
 		sessionStorage.setItem('cancel_redirec', '/login');
 		this.setState({ redirectS: true });
 	};
-
+	//render components
 	render() {
 		if (this.state.redirec) {
 			return <Redirect to={'/'} />;

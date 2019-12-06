@@ -1,3 +1,4 @@
+//imports
 import React, { Component } from 'react';
 import axios from 'axios';
 import {
@@ -31,14 +32,14 @@ export default class NewBook extends Component {
 	toggleNewBookModal = () => {
 		this.setState({ newBookModal: !this.state.newBookModal });
 	};
-
+	//devuelve el libro 
 	getBook = async () => {
-		const res = await axios.get('/api/book');
+		const res = await axios.get('https://elibrary07.herokuapp.com/api/book');
 		this.setState({ book: res.data });
 	};
-
+	//add new book
 	addBook = async () => {
-		axios.post('/api/book', this.state.newBookData).then((response) => {
+		axios.post('https://elibrary07.herokuapp.com/api/book', this.state.newBookData).then((response) => {
 			console.log(response.data);
 			this.setState({
 				book: [],
@@ -56,7 +57,7 @@ export default class NewBook extends Component {
 			});
 		});
 	};
-
+	
 	fileBook = () => {
 		if (window.File && window.FileReader && window.FileList && window.Blob) {
 			var file = document.querySelector('input[type=file]').files[0];
@@ -75,7 +76,7 @@ export default class NewBook extends Component {
 			alert('Este navegador no acepta la api FileReader');
 		}
 	};
-
+	//render
 	render() {
 		return (
 			<div>

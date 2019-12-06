@@ -1,3 +1,4 @@
+//imports
 import React, { Component } from 'react';
 import Navegador from './Navegador';
 import { Card, CardTitle, CardText, Row, Col } from 'reactstrap';
@@ -19,22 +20,22 @@ export default class showBooks extends Component {
 			sessionStorage.setItem('eAd', '');
 		}
 	}
-
+//get the book
 	componentDidMount() {
 		this.getBook();
 	}
 
 	getBook = async () => {
-		const res = await axios.get('/api/book');
+		const res = await axios.get('https://elibrary07.herokuapp.com/api/book');
 		this.setState({ book: res.data });
 	};
-
+//event redirect
 	cajaClick(id) {
 		// e.preventDefault();
 		this.setState({ redirectP: true });
 		sessionStorage.setItem('idBook', id);
 	}
-
+//render components and redirect to perfil libro
 	render() {
 		if (this.state.redirectP) {
 			return <Redirect to={'/perfil_libro'} />;

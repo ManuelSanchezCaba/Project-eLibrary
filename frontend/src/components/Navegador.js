@@ -17,14 +17,14 @@ export default class Navegador extends Component {
 			this.setState({ redirect: true });
 		}
 	}
-
+//logout user
 	logout = (e) => {
 		e.preventDefault();
 		sessionStorage.setItem('userData', '');
 		sessionStorage.clear();
 		this.setState({ redirect: true });
 	};
-
+//navegation bar 
 	navbarT = (e) => {
 		e.preventDefault();
 		if (this.state.ae === 'false') {
@@ -40,6 +40,10 @@ export default class Navegador extends Component {
 		}
 	};
 
+	search = (e) => {
+		alert('Esta funcion no esta disponible en estos momentos. Lamentamos los incovenientes.');
+	}
+//render
 	render() {
 		if (this.state.redirect) {
 			return <Redirect to={'/login'} />;
@@ -86,6 +90,7 @@ export default class Navegador extends Component {
 							className="btn btn-outline-info my-2 my-sm-0 m-2"
 							color="info"
 							type="submit"
+							onClick={this.search}
 						>
 							Search
 						</button>

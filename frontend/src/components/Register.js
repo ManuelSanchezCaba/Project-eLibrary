@@ -26,12 +26,12 @@ export default class Register extends Component {
 			this.setState({ classN: '' });
 		}
 	}
-
+//register user
 	signin = async (e) => {
 		e.preventDefault();
 		console.log(this.state.new_user.tipo_usuario);
 		await axios
-			.post('/api/authentication', this.state.new_user)
+			.post('https://elibrary07.herokuapp.com/api/authentication', this.state.new_user)
 			.then((response) => {
 				console.log(response.data);
 				this.setState({
@@ -51,13 +51,13 @@ export default class Register extends Component {
 		e.preventDefault();
 		this.setState({ cancel_redirec: true });
 	};
-
+//user type
 	handdleChange = (e) => {
 		let { new_user } = this.state;
 		new_user.tipo_usuario = e.target.value;
 		this.setState({ value: e.target.value, new_user });
 	};
-
+//render
 	render() {
 		if (this.state.cancel_redirec) {
 			return <Redirect to={sessionStorage.getItem('cancel_redirec')} />;

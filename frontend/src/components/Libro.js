@@ -1,3 +1,4 @@
+//imports
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
@@ -24,7 +25,7 @@ export default class Libro extends Component {
 
 	getBook = async () => {
 		const res = await axios.get(
-			'/api/book/' + sessionStorage.getItem('idBook')
+			'https://elibrary07.herokuapp.com/api/book/' + sessionStorage.getItem('idBook')
 		);
 		this.setState({ libro: res.data });
 	};
