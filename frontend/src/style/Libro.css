@@ -1,0 +1,15 @@
+.size {
+    font-size: 70px;
+    color: rgb(44, 41, 41);
+	margin: auto;
+}
+
+.center {
+	margin: auto;
+}
+
+.sizeL {
+    font-size: 40px;
+    color: rgb(46, 43, 43);
+	margin-right: 5px;
+}

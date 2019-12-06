@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import Navegador from './Navegador';
 import {
 	Card,
@@ -9,13 +10,13 @@ import {
 	Button,
 } from 'reactstrap';
 import axios from 'axios';
-// import { Redirect } from 'react-router-dom';
 
 export default class Perfil_Libro extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			book: [],
+			redirectB: false,
 		};
 	}
 
@@ -30,7 +31,15 @@ export default class Perfil_Libro extends Component {
 		this.setState({ book: res.data });
 	};
 
+	readBook = (e) => {
+		this.setState({ redirectB: true });
+	}
+
 	render() {
+		if(this.state.redirectB) {
+			return <Redirect to={'/libro'} />;
+		}
+
 		return (
 			<div>
 				<Navegador />
@@ -46,7 +55,7 @@ export default class Perfil_Libro extends Component {
 						<CardText className="font-weight-normal">
 							{this.state.book.descripcion}
 						</CardText>
-						<Button className="mr-2" color="outline-primary">
+						<Button className="mr-2" color="outline-primary" onClick={this.readBook}>
 							Leer el libro
 						</Button>
 						<Button color="outline-success">Escuchar el libro</Button>
